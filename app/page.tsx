@@ -39,6 +39,9 @@ type Product = {
 
 type CartLine = { product: Product; quantity: number };
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+const assetPath = (path: string) => `${basePath}${path}`;
+
 const products: Product[] = [
   {
     id: "sole",
@@ -46,7 +49,7 @@ const products: Product[] = [
     price: 420,
     description: "A soft gold ring finished with a pearl accent for effortless daily elegance.",
     material: "18k gold-plated stainless steel, pearl detail.",
-    image: "/images/sole-ring.png",
+    image: assetPath("/images/sole-ring.png"),
     alt: "Slim champagne-gold Solé ring with a small pearl accent",
     index: "01",
   },
@@ -56,7 +59,7 @@ const products: Product[] = [
     price: 590,
     description: "A sculpted bracelet designed to sit lightly on the wrist with a refined glow.",
     material: "18k gold-plated brass, zircon accents.",
-    image: "/images/auralis-bracelet.png",
+    image: assetPath("/images/auralis-bracelet.png"),
     alt: "Curved champagne-gold Auralis bracelet with subtle zircon accents",
     index: "02",
   },
@@ -66,7 +69,7 @@ const products: Product[] = [
     price: 480,
     description: "A delicate moon pendant inspired by quiet evenings and soft feminine light.",
     material: "18k gold-plated chain, pearl center.",
-    image: "/images/celeste-pendant.png",
+    image: assetPath("/images/celeste-pendant.png"),
     alt: "Delicate Celeste necklace with a moon pendant and pearl center",
     index: "03",
   },
@@ -236,7 +239,7 @@ function HeroSection() {
           <div className="hero-orbit hero-orbit--outer" aria-hidden="true" />
           <div className="hero-orbit hero-orbit--inner" aria-hidden="true" />
           <motion.div className="hero-image-wrap" style={reduced ? undefined : { x, y }} initial={{ opacity: 0, scale: 1.08, filter: "blur(12px)" }} animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }} transition={{ delay: 0.8, duration: 1.35, ease }}>
-            <Image src="/images/hero-jewelry.png" alt="Solé ring, Auralis bracelet, and Celeste pendant floating together in warm light" fill priority sizes="(max-width: 820px) 120vw, 58vw" />
+            <Image src={assetPath("/images/hero-jewelry.png")} alt="Solé ring, Auralis bracelet, and Celeste pendant floating together in warm light" fill priority sizes="(max-width: 820px) 120vw, 58vw" />
             <div className="hero-image-sheen" aria-hidden="true" />
           </motion.div>
           <motion.div className="product-label product-label--ring" initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 2, duration: 0.8 }}><i />Solé ring</motion.div>
@@ -264,9 +267,9 @@ function ProductFilm() {
   const [playing, setPlaying] = useState(true);
   const reduced = useReducedMotion();
   const scenes = [
-    { image: "/images/sole-ring.png", label: "Solé / Reflection study", position: "52% 54%" },
-    { image: "/images/auralis-bracelet.png", label: "Auralis / Satin study", position: "50% 46%" },
-    { image: "/images/celeste-pendant.png", label: "Celeste / Light study", position: "50% 58%" },
+    { image: assetPath("/images/sole-ring.png"), label: "Solé / Reflection study", position: "52% 54%" },
+    { image: assetPath("/images/auralis-bracelet.png"), label: "Auralis / Satin study", position: "50% 46%" },
+    { image: assetPath("/images/celeste-pendant.png"), label: "Celeste / Light study", position: "50% 58%" },
   ];
 
   useEffect(() => {
@@ -355,7 +358,7 @@ function BrandStory() {
           <div className="story-signature"><i /><span>Designed in quiet light<br />Luméa Atelier</span></div>
         </div>
         <motion.div className="story-visual" initial={{ opacity: 0, y: 70 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 1, ease }}>
-          <Image src="/images/celeste-pendant.png" alt="Macro view of the Celeste moon pendant catching warm light" fill sizes="(max-width: 820px) 100vw, 55vw" />
+          <Image src={assetPath("/images/celeste-pendant.png")} alt="Macro view of the Celeste moon pendant catching warm light" fill sizes="(max-width: 820px) 100vw, 55vw" />
           <div className="story-reflection" aria-hidden="true" />
           <span>Soft light study · Celeste</span>
         </motion.div>
@@ -393,7 +396,7 @@ function GiftSection() {
       <div className="gift-grid page-shell">
         <motion.div className="gift-visual" initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 1, ease }}>
           <div className="gift-orbit" aria-hidden="true" />
-          <Image src="/images/gift-box.png" alt="Luméa ivory jewelry gift box with a warm golden glow" width={1448} height={1086} sizes="(max-width: 820px) 100vw, 55vw" />
+          <Image src={assetPath("/images/gift-box.png")} alt="Luméa ivory jewelry gift box with a warm golden glow" width={1448} height={1086} sizes="(max-width: 820px) 100vw, 55vw" />
           <span>Signature ivory packaging</span>
         </motion.div>
         <div className="gift-copy">
